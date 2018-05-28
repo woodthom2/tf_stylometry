@@ -1,5 +1,10 @@
-# tf_stylometry
+# TF Stylometry
 Stylometry demo in TensorFlow
+
+You need:
+
+* Python 3 (I recommend Anaconda)
+* Tensorflow 1.4+
 
 # Acknowledgement
 
