@@ -50,7 +50,7 @@ saver_embedding.restore(sess,
 
 
 saver.restore(sess,
-              'runs/checkpoints/model-100')
+              'runs_danbrown/checkpoints/model-6400')
 
 
 
