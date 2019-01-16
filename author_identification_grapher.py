@@ -47,11 +47,13 @@ def make_graph(input1, result):
     # objects to their JSON equivalents
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
 
-    print ("num graphs:", len(graphs), graphJSON, ids)
+    #print ("num graphs:", len(graphs), graphJSON, ids)
+
+    result_description = ", ".join([author + ": " + str(round(prob, 2)) for author, prob in result])
 
 
     return render_template('layouts/index.html',
                            ids=ids,
                            input1=input1,
-                           output=str(result),
+                           output=result_description,
                            graphJSON=graphJSON)
