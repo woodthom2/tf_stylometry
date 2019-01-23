@@ -10,14 +10,22 @@ from text_cnn import TextCNN
 
 SAMPLE_LENGTH = 200
 
+ENV = "GOOGLE"
+if ENV == "GOOGLE":
+    PATH = "/home/vmagent/app"
+elif ENV == "PYTHONANYWHERE":
+    PATH = "/home/woodthom/tf_stylometry"
+else:
+    PATH = ""
+
 
 import gzip, pickle as pkl
 
-with gzip.GzipFile("data/abridged_index2word.pkl.gz", "rb") as f:
+with gzip.GzipFile(PATH + "/data/abridged_index2word.pkl.gz", "rb") as f:
     abridged_index2word = pkl.load(f)
-with gzip.GzipFile("data/abridged_word2index.pkl.gz", "rb") as f:
+with gzip.GzipFile(PATH + "/data/abridged_word2index.pkl.gz", "rb") as f:
     abridged_word2index = pkl.load(f)
-with gzip.GzipFile("data/id_to_cat.pkl.gz", "rb") as f:
+with gzip.GzipFile(PATH + "/data/id_to_cat.pkl.gz", "rb") as f:
     id_to_cat = pkl.load(f)
 
 
@@ -45,12 +53,12 @@ saver_embedding = tf.train.Saver(gensim_weights)
 
 
 saver_embedding.restore(sess,
-                        "output/gensim_weights")
+                        PATH + "/output/gensim_weights")
 
 
 
 saver.restore(sess,
-              'runs_danbrown/checkpoints/model-6400')
+              PATH + '/runs/checkpoints/model-6400')
 
 
 
@@ -93,13 +101,13 @@ def execute_cnn(text_preprocessed_gensim):
     input_data = []
     if len(text_preprocessed_gensim) < SAMPLE_LENGTH:
         input_data.append([])
-        for i in range(100):
+        for i in range(SAMPLE_LENGTH):
             input_data[0].extend(text_preprocessed_gensim)
             if len(input_data[0]) > SAMPLE_LENGTH:
                 input_data[0] = input_data[0][:SAMPLE_LENGTH]
                 break
     else:
-        for i in range(0, len(text_preprocessed_gensim) - SAMPLE_LENGTH - 1, 100):
+        for i in range(0, len(text_preprocessed_gensim) - SAMPLE_LENGTH - 1, SAMPLE_LENGTH):
             input_data.append(text_preprocessed_gensim[i:i + SAMPLE_LENGTH])
 
     result = sess.run(cnn.scores, {cnn.input_x: input_data, cnn.dropout_keep_prob: 1.0})
