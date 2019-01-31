@@ -33,7 +33,7 @@ app = Flask(__name__)
 @app.route('/')
 def my_form():
     return render_template('layouts/index.html',
-                           input1="Paste text sample here",
+                           input1=None,
                            output="Prediction")
 
 

@@ -121,6 +121,25 @@ h1 { font-color: "#1abc9c"; }
 
 
     <title>Author identification - forensic stylometry</titLe>
+    
+    <script>
+var example1 = `Famous author Dan Brown stepped into his magnificent study. He dismissively picked up the latest review of his work. An arrogant data scientist in London, England, claimed to have trained a neural network which would recognise his books. 
+The writer groaned. What did this mean?
+He could no longer write using a pseudonym.`;
+
+var example2 = `"You have spoken out of turn again," said Snape, coolly. "Ten more points from Gryffindor."
+"Can somebody other than Miss Granger tell me, what is the difference between a Bezoar and a Snitch?"
+There was a sudden rummaging for quills.`;
+
+        function setExample1(number){
+            document.getElementById("input1").value=example1;
+        }
+        function setExample2(number){
+            document.getElementById("input1").value=example2;
+        }
+    </script>
+
+
     </head>
 
 
@@ -138,12 +157,17 @@ For best results try entering at least two or three paragraphs of text. You can 
 </p>
 
 <form action="submit" method="post">
+    <button onclick="setExample1()">Example 1</button>
+
+    <button onclick="setExample2()">Example 2</button>
+
 
     <div class=form>
 
 
+
         <div class=form>
-            <textarea name=input1 cols="50" rows="15">{{input1}}</textarea>
+            <textarea name=input1 id=input1 cols="50" rows="15">{{input1 if input1 != None else 'Famous author Dan Brown stepped into his magnificent study. He dismissively picked up the latest review of his work. An arrogant data scientist in London, England, claimed to have trained a neural network which would recognise his books.\nThe writer groaned. What did this mean?\nHe could no longer write using a pseudonym.'}}</textarea>
         </div>
 
 
@@ -151,7 +175,7 @@ For best results try entering at least two or three paragraphs of text. You can 
 
 
     <div class=form>
-        <input type="submit">
+        <input type="submit" value="Who wrote it?">
 
     </div>
 
