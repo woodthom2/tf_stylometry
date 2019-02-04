@@ -40,7 +40,7 @@ def my_form():
 @app.route('/submit', methods=['POST'])
 def my_form_post():
     input1 = request.form['input1']
-
+    print ("INFO Received input", input1)
     result = author_inference.predict(input1)
 
 
