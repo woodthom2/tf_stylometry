@@ -1,6 +1,8 @@
 # TF Stylometry
 Stylometry demo in TensorFlow
 
+By Thomas Wood, https://www.fastdatascience.com
+
 You need:
 
 * Python 3 (I recommend Anaconda)
